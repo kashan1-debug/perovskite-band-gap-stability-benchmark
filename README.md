@@ -24,9 +24,9 @@ Three more facts frame the result:
 - **Site resolution, not B-site physics, carries most of the gain.** Giving the model the A, B and X sites explicitly (site-aware features) lifts pooled R² from 0.086 to 0.733. Removing all B-site information only drops it to 0.683 — B-site physics adds just **+0.050**, and helps some metals (W, Re, Ta) while hurting others (Cr).
 - **The graph model does not win.** A pretrained MEGNet (trained on 133,420 Materials Project structures), used zero-shot and calibrated, reaches 0.561 — below site-aware XGBoost at 0.733. Its raw predictions are off by a constant scale offset (raw R² −77.8), because the two datasets reference oxygen differently; calibration fixes the scale, not the ranking (Spearman 0.752). The 0.561 is an upper bound: ~6.2% of Castelli formulas also appear in Materials Project.
 
-Uncertainty under element shift is metal-dependent. Split-conformal intervals (nominal 90%) hold on a random split (coverage **0.899**) and on held-out Te (**0.923**) and Mg (**0.945**), but **fail on W (0.690)** — coverage is not a property of the method, it is a property of the metal.
+Uncertainty under element shift is metal-dependent. Split-conformal intervals (nominal 90%) hold on a random split (coverage **0.899**) and range from **0.632 (Re)** to **0.984 (Zn)** across nine held-out metals — Te 0.923, Mg 0.945, W 0.690 — coverage is not a property of the method, it is a property of the metal.
 
-Band-gap screening on the same grid is a cautionary tale: only 735 of 18,928 compounds have a non-zero DFT gap. A classifier reaches ROC-AUC 0.919, but at the usual 0.5 threshold it finds only ~7% of the non-metals. Lowering the threshold to ~0.2 gives the best F1 (0.528). Grouped regression on the 735 non-zero-gap compounds gives R² 0.558.
+Band-gap screening on the same grid is a cautionary tale: only 735 of 18,928 compounds have a non-zero DFT gap. A classifier reaches ROC-AUC 0.919 and PR-AUC 0.457, but at the usual 0.5 threshold it finds only ~8% of the non-metals. Lowering the threshold to ~0.2 gives the best F1 (0.528). Grouped regression on the 735 non-zero-gap compounds gives R² 0.558.
 
 ## Figures
 
